@@ -9,23 +9,24 @@ apt-get install -y libxcb-render-util0-dev libxcb-shape0-dev libxcb-xfixes0-dev 
 
 mkdir -p ~/.local/share/fonts/
 
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/RobotoMono.zip
+curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Iosevka.tar.xz
+curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/RobotoMono.tar.xz
+curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.tar.xz
 
-unzip Iosevka.zip -d ~/.local/share/fonts/
-unzip RobotoMono.zip -d ~/.local/share/fonts/
+tar -xvf Iosevka.tar.xz -C ~/.local/share/fonts/
+tar -xvf RobotoMono.tar.xz -C ~/.local/share/fonts/
+tar -xvf Hack.tar.xz -C ~/.local/share/fonts/
+
+rm Iosevka.tar.xz
+rm RobotoMono.tar.xz
+rm Hack.tar.xz
 
 fc-cache -fv
 
-wget https://github.com/barnumbirr/alacritty-debian/releases/download/v0.10.0-rc4-1/alacritty_0.10.0-rc4-1_amd64_bullseye.deb
-sudo dpkg -i alacritty_0.10.0-rc4-1_amd64_bullseye.deb
-sudo apt install -f
-
-mkdir ~/.fonts
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Hack.zip
-unzip Hack.zip -d ~/.fonts/
-
-
+cargo install alacritty
+# wget https://github.com/barnumbirr/alacritty-debian/releases/download/v0.10.0-rc4-1/alacritty_0.10.0-rc4-1_amd64_bullseye.deb
+# sudo dpkg -i alacritty_0.10.0-rc4-1_amd64_bullseye.deb
+# sudo apt install -f
 
 git clone https://www.github.com/Airblader/i3 i3-gaps
 cd i3-gaps && mkdir -p build && cd build && meson ..
@@ -52,7 +53,6 @@ cp config/compton/compton.conf ~/.config/compton/compton.conf
 cp config/rofi/config ~/.config/rofi/config
 cp fehbg ~/.fehbg
 cp config/i3/clipboard_fix.sh ~/.config/i3/clipboard_fix.sh
-cp -r wallpaper ~/.wallpaper
 
 chmod +x ~/.config/bin/*
 chmod +x ~/.config/polybar/launch.sh
